@@ -1,0 +1,28 @@
+type ContactUs {
+  _id: String
+  first_name: String
+  last_name: String
+  email: String
+  company: String
+  phone: String
+  how_can_help_you: String
+  how_did_you_hear_about_us: String
+}
+
+input ContactUsInput {
+  first_name: String
+  last_name: String
+  email: String
+  company: String
+  phone: String
+  how_can_help_you: String
+  how_did_you_hear_about_us: String
+}
+
+type Query {
+  getAllContactUs: ContactUs
+}
+
+type Mutation {
+  createContactUs(input: ContactUsInput): ContactUs
+}

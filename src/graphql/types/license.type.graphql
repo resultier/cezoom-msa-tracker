@@ -1,0 +1,136 @@
+enum LicenseDistinction {
+  military
+  student
+  educator
+}
+
+enum LicenseStatus {
+  active
+  inactive
+  retired
+  expired
+  renewed
+  limited
+}
+
+type License {
+  _id: ID
+  name: String
+  profession: ProfessionType
+  industry: Industry
+  state: State
+  country: Country
+  detail: DetailLicense
+}
+
+type UserLicenses {
+  _id: ID
+  user_id: String
+  licenses: [License]
+}
+
+type LicensesUser {
+  licenses: [DetailedLicense]
+}
+
+type Query {
+  license(id: ID!): License
+  licenses: [License]
+  licensesByUser(user_id: String): LicensesUser
+}
+
+input UserLicensesInput {
+  user_id: String!
+  licenses: [DetailedLicenseInput]
+}
+
+input LicenseInput {
+  _id: ID
+  name: String,
+  industry: IndustryInput
+  profession: ProfessionInput
+  state: StateInput
+  country: CountryInput
+  detail: DetailLicenseInput
+}
+
+input UpdateLicenseInput {
+  _id: ID!
+  name: String!
+  industry: IndustryInput
+  detail: DetailLicenseInput
+  state: StateInput
+}
+
+input DetailLicenseInput {
+  license_number: String!
+  aquired_date: Int
+  expiration_date: Int
+  first_renewal: Boolean
+  issue_date: Int
+  licensed_by: String
+  graduation_date: Int
+  first_ce_reporting: Int
+  last_ce_reporting: Int
+  last_new_ce_reporting: Int
+  is_granted_extension: Boolean,
+  extended_date: Int,
+  license_distinction: String
+  is_inactive: Boolean
+  is_active: Boolean
+  is_retired: Boolean
+  is_renewed: Boolean
+  file: FileInput
+}
+
+input DetailedLicenseInput {
+  license: LicenseInput
+  detail: DetailLicenseInput!
+}
+
+input LicenseFilter {
+  country: String
+}
+
+type DetailLicense {
+  license_number: String
+  aquired_date: Int
+  expiration_date: Int
+  first_renewal: Boolean
+  issue_date: Int
+  licensed_by: String
+  graduation_date: Int
+  first_ce_reporting: Int
+  last_ce_reporting: Int
+  last_new_ce_reporting: Int
+  is_granted_extension: Boolean,
+  extended_date: Int,
+  license_distinction: String
+  is_inactive: Boolean
+  is_active: Boolean
+  is_retired: Boolean
+  is_renewed: Boolean
+  is_expired: Boolean
+  file: FileType
+}
+
+
+type DetailedLicense {
+  _id: ID
+  license: License
+  detail: DetailLicense
+}
+
+type Query {
+  licenses(filters: LicenseFilter): [License]
+  licesesByUser(filters: LicenseFilter): [License]
+}
+
+type Mutation {
+  addLicense(data: LicenseInput): License
+  addLicenseToUser(
+    user_id: String!
+    license: DetailedLicenseInput
+  ): [DetailedLicense]
+  addUserLicenses(input: UserLicensesInput): DetailedLicense
+}

@@ -1,0 +1,25 @@
+type State {
+  _id: ID
+  name: String
+  country_code: String
+  state_code: String
+  latitude: String
+  longitude: String
+  country: Country
+}
+
+input StateInput {
+  _id: ID
+  name: String
+  country_code: String
+  state_code: String
+  latitude: String
+  longitude: String
+}
+
+type Query {
+  states: [State]
+  state(id: ID!): State
+  stateByCountryAndName(country: String!, name: String!): State
+  stateByCountry(codes: [String]): [State]
+}

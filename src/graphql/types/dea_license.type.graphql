@@ -1,0 +1,88 @@
+type DeaLicense {
+  _id: ID
+  name: String
+  state: State
+  country: Country
+  industry: Industry
+}
+
+type UserDeaLicenses {
+  _id: ID
+  user_id: String
+  dea_licenses: [DeaLicense]
+}
+
+type LocalLicense {
+  name: String
+  state: State
+  country: Country
+  industry: Industry
+}
+
+type DetailedDeaLicense {
+  _id: ID
+  license: LocalLicense
+  detail: DetailDeaLicense
+}
+
+type DetailDeaLicense {
+  dea_license_number: String
+  aquired_date: Int
+  expiration_date: Int
+  file: FileType
+}
+
+type PaginationType {
+  page: Int
+  last_page: Int
+}
+
+type PaginatedDeaLicenses {
+  dea_licenses: [DeaLicense]
+  pagination: PaginationType
+}
+
+type PaginatedUserDeaLicenses {
+  dea_licenses: [DetailedDeaLicense]
+  pagination: PaginationType
+}
+
+input deaLicenceFilterInput {
+  search: String
+  states: [String]
+  countries: [String]
+  industries: [String],
+  status: [String]
+}
+
+type Query {
+  deaLicense(id: ID!): DeaLicense
+  deaLicenses(page: Int, filters: deaLicenceFilterInput): PaginatedDeaLicenses
+  deaLicensesByUser(page: Int, filters: deaLicenceFilterInput): PaginatedUserDeaLicenses
+}
+
+input DeaLicenseInput {
+  _id: String
+  name: String
+  state: StateInput
+  country: CountryInput
+  industry: IndustryInput
+}
+
+input DetailDeaLicenseInput {
+  dea_license_number: String!
+  aquired_date: Int!
+  expiration_date: Int
+  file: FileInput
+}
+
+input DetailedDeaLicenseInput {
+  license: DeaLicenseInput!
+  detail: DetailDeaLicenseInput!
+}
+
+type Mutation {
+  addDeaLicense(dea_license: DeaLicenseInput, page: Int): DeaLicense
+  addDeaLicenseToUser(_id: String, dea_license: DetailedDeaLicenseInput, page: Int): DetailedDeaLicense
+  deleteDeaLicenseToUser(_id: String!): String
+}

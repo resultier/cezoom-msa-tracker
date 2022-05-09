@@ -1,0 +1,67 @@
+enum ProviderLogoDisplayType {
+  logo_only
+  statement_right
+  statement_left
+  statement_up
+  statement_bottom
+}
+
+enum ProviderStateFilter {
+  active
+  expired
+  upcoming
+}
+
+type Provider {
+  _id: ID
+  country: Country
+  industry: Industry
+  affiliation: String
+  affiliation_logo: FileType
+  affiliation_start_date: Int
+  affiliation_end_date: Int
+  disclaimer: String
+  logo_display: ProviderLogoDisplayType
+  provider_statement: String
+  is_active: Boolean
+  is_expired: Boolean
+}
+
+type UserProviders {
+  _id: ID!
+  user_id: String
+  providers: [Provider]
+}
+
+type ProviderStatistics {
+  provider_affiliations: Int
+  active_providers: Int
+  expired_providers: Int
+  upcoming_providers: Int
+}
+
+input ProviderInput {
+  id: ID
+  country: CountryInput
+  industry: IndustryInput
+  affiliation: String
+  affiliation_start_date: Int
+  affiliation_end_date: Int
+  disclaimer: String
+  logo_display: ProviderLogoDisplayType
+  provider_statement: String,
+  file: FileInput
+}
+
+type Query {
+  providers(keywords: String, state: ProviderStateFilter): [Provider]
+  provider(providerId: String): Provider
+  providerStatistics: ProviderStatistics
+}
+
+type Mutation {
+  addProvider(input: ProviderInput!): UserProviders
+  updateProvider(input: ProviderInput!): UserProviders
+  deleteProvider(id: String!): UserProviders
+  inactiveProvider(id: String!): Boolean
+}

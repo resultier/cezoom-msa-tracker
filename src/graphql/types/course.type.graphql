@@ -1,0 +1,25 @@
+type CourseSurveyType {
+  course_id: String,
+  questions: [Question],
+}
+
+type CoursePricingType {
+  course_id: String,
+  currency: String,
+  price: Int
+}
+
+type CourseProvidersType {
+  course_id: String,
+  providers: [Provider],
+}
+
+type Query {
+  courseProviders(_id: ID!): CourseProvidersType
+  courseSurvey(_id: ID!): CourseSurveyType
+  coursePricing(_id: ID!): CoursePricingType
+}
+
+type Mutation {
+  courseAnswerSurveyQuestions(answers: [QuestionAnswerInput]!): String
+}

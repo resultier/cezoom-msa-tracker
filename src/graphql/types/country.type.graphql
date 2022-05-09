@@ -1,0 +1,65 @@
+type Country {
+  _id: ID
+  name: String
+  alpha2Code: String
+  alpha3Code: String
+  region: String
+  flag: String
+  callingCodes: [String]
+}
+
+type PresenterCountries {
+  _id: ID
+  user_id: String
+  countries: [Country]
+}
+
+type EmployeeCountries {
+  _id: ID
+  user_id: String
+  countries: [Country]
+}
+
+type Query {
+  countries: [Country]
+  country(id: ID!): Country
+  presenterCountries(id: ID!): PresenterCountries
+  employeeCountries(id: ID!): EmployeeCountries
+}
+
+input CountryInput {
+  _id: ID
+  name: String
+  alpha2Code: String
+  alpha3Code: String
+  callingCodes: [String]
+  region: String
+  flag: String
+}
+
+input CountriesPresenterInput {
+  countries: [CountryInput]
+}
+
+input CountryPresenterInput {
+  country: CountryInput
+}
+
+input CountriesEmployeeInput {
+  countries: [CountryInput]
+}
+
+input CountryEmployeeInput {
+  country: CountryInput
+}
+
+type Mutation {
+  addCountriesPresenter(data: CountriesPresenterInput): PresenterCountries
+  addCountryPresenter(data: CountryPresenterInput): PresenterCountries
+  updateCountryPresenter(data: CountryPresenterInput): PresenterCountries
+  deleteCountryPresenter(country: ID!): PresenterCountries
+  addCountriesEmployee(data: CountriesEmployeeInput): EmployeeCountries
+  addCountryEmployee(data: CountryEmployeeInput): EmployeeCountries
+  updateCountryEmployee(data: CountryEmployeeInput): EmployeeCountries
+  deleteCountryEmployee(country: ID!): EmployeeCountries
+}

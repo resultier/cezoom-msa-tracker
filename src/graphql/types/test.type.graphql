@@ -1,0 +1,98 @@
+input PresenterInput {
+  id: String!
+}
+
+type TestType {
+  _id: String,
+  name: String,
+  description: String,
+  required: Boolean,
+  deadline: Float,
+  course_id: String,
+  company_id: String,
+  minimum_grade: Float,
+  maximum_attempts: Float,
+  maximum_time: Int,
+  status: String,
+  questions: [Question],
+  presenters: [User],
+  approved: Boolean
+  attempts: Int,
+  progress: Float
+  grade: Float
+}
+
+type TestAttendeeType {
+  user: User,
+  test: TestType,
+  approved: Boolean
+  attempts: Int,
+  progress: Float
+  grade: Float
+}
+
+type TestAnalyticsType {
+  attendees: Int,
+  approved: Int,
+  completed: Int,
+  incompleted: Int,
+  average_grade: Float
+  average_attempts: Float
+  average_time: Float
+}
+
+type PaginatedTests {
+  tests: [TestType],
+  pagination: PaginationType
+}
+
+type PaginatedAttendees {
+  attendees: [TestAttendeeType],
+  pagination: PaginationType
+}
+
+input testFilterInput {
+  search: String
+  status: [String]
+  required: Boolean
+}
+
+type Query {
+  tests(page: Int, filters: testFilterInput): PaginatedTests
+  test(id: ID!): TestType
+  testsByIds(user_id: ID!, ids: [ID]!): [TestType]
+  testsByUser(page: Int, filters: testFilterInput): PaginatedTests
+  testsByCompany(page: Int, filters: testFilterInput): PaginatedTests
+  testAtendees(_id: ID!, page: Int, filters: testFilterInput): PaginatedAttendees
+  testAtendeeAnswers(user_id: ID!, test_id: ID!): TestType
+  testAnalytics(_id: ID!): TestAnalyticsType
+}
+
+input TestInput {
+  _id: String,
+  course_id: String!
+  company_id: String!
+  name: String!
+  description: String,
+  required: Boolean!
+  deadline: Float!
+  minimum_grade: Float!,
+  maximum_attempts: Float,
+  maximum_time: Int,
+  status: String!
+}
+
+type GradeType {
+  attempts: Int,
+  maximum_attempts: Int,
+  approved: Boolean,
+  grade: Int,
+  questions: [Question]
+}
+
+type Mutation {
+  test(input: TestInput): TestType
+  testQuestion(input: QuestionInput): Question
+  answerTestQuestion(input: QuestionAnswerInput): Question
+  finishTest(id: String): GradeType
+}

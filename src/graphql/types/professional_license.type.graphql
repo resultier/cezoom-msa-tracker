@@ -1,0 +1,97 @@
+type ProfessionType {
+  _id: ID
+  name: String
+}
+
+input ProfessionInput {
+  _id: ID
+  name: String
+}
+
+type UserProfessionalLicenseType {
+  _id: ID,
+  state: State,
+  country: Country,
+  industry: Industry,
+  profession: ProfessionType,
+  license_number: String,
+  aquired_date: Float,
+  expiration_date: Float,
+  license_url: String,
+  first_renewal: Boolean,
+  issue_date: Float,
+  licensed_by: String,
+  graduation_date: Float,
+  last_ce_reporting: Float,
+  last_new_ce_reporting: Float,
+  is_granted_extension: Boolean,
+  extended_date: Float,
+  years_duration: Float,
+  month_duration: Float,
+  days_duration: Float,
+  new_extended_date: Float,
+  license_distinction: String,
+  is_active: Boolean,
+  is_inactive: Boolean,
+  is_retired: Boolean,
+  is_expired: Boolean,
+  is_renewed: Boolean,
+  is_limited: Boolean,
+  file: FileType,
+}
+
+input UserProfessionalLicenseInput {
+  _id: ID,
+  state: StateInput!,
+  country: CountryInput!,
+  industry: IndustryInput!,
+  profession: ProfessionInput,
+  license_number: String!,
+  aquired_date: Float!,
+  expiration_date: Float,
+  license_url: String,
+  first_renewal: Boolean,
+  issue_date: Float,
+  licensed_by: String,
+  graduation_date: Float,
+  last_ce_reporting: Float,
+  last_new_ce_reporting: Float,
+  is_granted_extension: Boolean,
+  extended_date: Float,
+  years_duration: Float,
+  month_duration: Float,
+  days_duration: Float,
+  new_extended_date: Float,
+  license_distinction: String,
+  is_active: Boolean,
+  is_inactive: Boolean,
+  is_retired: Boolean,
+  is_expired: Boolean,
+  is_renewed: Boolean,
+  is_limited: Boolean,
+  file: FileInput,
+}
+
+type PaginatedUserProfessionalLicences {
+  professional_licences: [UserProfessionalLicenseType]
+  pagination: PaginationType
+}
+
+input userProfessionalLicenceFilterInput {
+  search: String
+  states: [String]
+  countries: [String]
+  industries: [String]
+  professions: [String]
+  status: [String]
+}
+
+type Query {
+  userProfessionalLicences(page: Int, filters: userProfessionalLicenceFilterInput): PaginatedUserProfessionalLicences
+  userProfessionalLicense(_id: String!): UserProfessionalLicenseType
+}
+
+type Mutation {
+  userProfessionalLicense(professional_license: UserProfessionalLicenseInput): UserProfessionalLicenseType
+  deleteUserProfessionalLicense(_id: String!): String
+}

@@ -1,0 +1,72 @@
+type MembershipType {
+  _id: ID
+  name: String,
+  country: Country
+  state: State
+  industry: Industry
+}
+
+input MembershipInput {
+  _id: ID
+  name: String,
+  country: CountryInput
+  state: StateInput
+  industry: IndustryInput
+}
+
+type MembershipDetailType {
+  membership_number: String
+  aquired_date: Int
+  expiration_date: Int
+  file: FileType
+}
+
+type PaginatedMembershipsType {
+  memberships: [MembershipType],
+  pagination: PaginationType
+}
+
+type UserMembershipType {
+  _id: ID
+  membership: MembershipType,
+  detail: MembershipDetailType
+}
+
+type PaginatedUserMembershipsType {
+  memberships: [UserMembershipType],
+  pagination: PaginationType
+}
+
+input MembershipDetailInput {
+  membership_number: String!
+  aquired_date: Int!
+  expiration_date: Int
+  file: FileInput
+}
+
+input UserMembershipInput {
+  _id: ID
+  membership: MembershipInput!
+  detail: MembershipDetailInput!
+}
+
+input MembershipFiltersInput {
+  search: String,
+  countries: [String]
+  states: [String]
+  industries: [String]
+  status: [String]
+}
+
+type Query {
+  memberships(page: Int, filters: MembershipFiltersInput): PaginatedMembershipsType
+  membership(id: ID!): MembershipType
+  userMemberships(page: Int, filters: MembershipFiltersInput): PaginatedUserMembershipsType
+}
+
+type Mutation {
+  membership(input: MembershipInput!): MembershipType
+  deleteMembership(id: ID!): String
+  userMembership(input: UserMembershipInput!): UserMembershipType
+  deleteUserMembership(id: ID!): String
+}

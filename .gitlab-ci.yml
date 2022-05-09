@@ -1,0 +1,85 @@
+# This file is a template, and might need editing before it works on your project.
+# Official framework image. Look for the different tagged releases at:
+# https://hub.docker.com/r/library/node/tags/
+image: node:14.17
+
+variables:
+  CONTAINER_IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
+  CONTAINER_RELEASE_IMAGE: $CI_REGISTRY_IMAGE:latest
+
+stages:
+  - test
+  - build
+  - deploy
+
+# This folder is cached between builds
+# http://docs.gitlab.com/ee/ci/yaml/README.html#cache
+#cache:
+# untracked: true
+#key: ${CI_COMMIT_REF_SLUG}
+#paths:
+# - node_modules/
+
+test:
+  allow_failure: true
+  script:
+    - git config --global url."https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.com/".insteadOf https://gitlab.com/
+    - npm install
+    - cp .env.testing .env
+    - npm run test
+
+build:
+  stage: build
+  retry: 2
+  only:
+    - develop
+    - staging
+  image: docker:19.03.12
+  services:
+    - docker:dind
+  script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker build --pull -t $CONTAINER_IMAGE .
+    - docker push $CONTAINER_IMAGE
+
+development:
+  stage: deploy
+  image: kchinchillam98/tools:alpine-kubectl
+  only:
+    - develop
+  environment:
+    name: dev
+    url: https://assets.cezoom.resultier.dev
+  dependencies: []
+  script:
+    - kubectl config set-cluster CEZoom-dev --server="$KUBE_URL" --insecure-skip-tls-verify=true
+    - kubectl config set-credentials CEZoom-k8s-dev-admin --token="$KUBE_TOKEN"
+    - kubectl config set-context default --cluster=CEZoom-dev --user=CEZoom-k8s-dev-admin
+    - kubectl config use-context default
+    - cd .k8s
+    - cd dev
+    - kubectl apply -f deployment.yaml
+    - kubectl apply -f service.yaml
+    - kubectl apply -f ingress.yaml
+    - kubectl rollout restart deployment assets --namespace=cezoom-dev
+
+staging:
+  stage: deploy
+  image: kchinchillam98/tools:alpine-kubectl
+  only:
+    - staging
+  environment:
+    name: stg
+    url: https://assets.cezoom.stg.resultier.dev
+  dependencies: []
+  script:
+    - kubectl config set-cluster CEZoom-dev --server="$KUBE_URL" --insecure-skip-tls-verify=true
+    - kubectl config set-credentials CEZoom-k8s-dev-admin --token="$KUBE_TOKEN"
+    - kubectl config set-context default --cluster=CEZoom-dev --user=CEZoom-k8s-dev-admin
+    - kubectl config use-context default
+    - cd .k8s
+    - cd stg
+    - kubectl apply -f deployment.yaml
+    - kubectl apply -f service.yaml
+    - kubectl apply -f ingress.yaml
+    - kubectl rollout restart deployment assets --namespace=cezoom-stg

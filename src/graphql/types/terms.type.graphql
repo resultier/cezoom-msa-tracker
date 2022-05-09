@@ -1,0 +1,24 @@
+type Terms {
+  privacy_policy: String
+  privacy_policy_updated: String
+  terms_of_service: String
+  terms_of_service_updated: String
+  payment_agreement: String
+  payment_agreement_updated: String
+  our_story: String
+}
+
+input TermsInput {
+  privacy_policy: String
+  terms_of_service: String
+  payment_agreement: String
+  our_story: String
+}
+
+type Query {
+  terms: Terms
+}
+
+type Mutation {
+  updateTerms(input: TermsInput): Terms
+}

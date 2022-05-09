@@ -1,0 +1,49 @@
+enum DocumentStatus {
+  read
+  unread
+}
+
+type DocumentsType {
+  id: ID
+  user_name: String
+  note: String
+  attachment: FileType
+  is_accesible: Boolean
+  status: DocumentStatus
+  published_date: Float
+  replies: [DocumentsType]
+}
+
+type CompanyDocumentsType {
+  company_id: String
+  documents: [DocumentsType]
+}
+
+input DocumentsInput {
+  note: String
+  is_accesible: Boolean
+  status: DocumentStatus
+}
+
+input DocumentsFilter {
+  is_read: Boolean
+  is_unread: Boolean
+}
+
+type Query {
+  companyDocuments(filters: DocumentsFilter): CompanyDocumentsType
+  companyDocument(id: String!): CompanyDocumentsType
+}
+
+type Mutation {
+  addCompanyDocument(input: DocumentsInput!): CompanyDocumentsType
+  updateCompanyDocument(
+    id: String!
+    input: DocumentsInput!
+  ): CompanyDocumentsType
+  deleteCompanyDocument(id: String!): CompanyDocumentsType
+  addCompanyDocumentReply(
+    document_id: String!
+    reply: DocumentsInput!
+  ): CompanyDocumentsType
+}

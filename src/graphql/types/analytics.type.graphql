@@ -1,0 +1,11 @@
+type ExpirationUsersType {
+  user_id: ID
+  dea_licences: [DetailedDeaLicense]
+  memberships: [UserMembershipType]
+  custom_documents: [FileType]
+  industry_licences: [License]
+}
+
+type Query {
+  expirations(from: Int!, to: Int!): [ExpirationUsersType]
+}

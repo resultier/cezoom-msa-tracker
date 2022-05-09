@@ -1,0 +1,192 @@
+type PhoneType {
+  code: String,
+  number: String!
+}
+
+type CityType {
+  _id: ID
+  name: String
+}
+
+type SkillType {
+  skill: String
+  proficiency: String
+}
+
+type LanguageType {
+  language: String
+  proficiency: String
+}
+
+type ReferenceType {
+  name: String
+  company: String
+  position: String
+  email: String
+  phone: PhoneType
+}
+
+type EducationType {
+  insitution: String
+  degree: String
+  field: String
+  country: Country
+  state: State
+  city: CityType
+  phone: PhoneType
+  email: String
+  website: String
+  start_date: Int
+  end_date: Int
+  active: Boolean
+  notes: String
+}
+
+type WorkType {
+  company: String
+  position: String
+  country: Country
+  state: State
+  city: CityType
+  phone: PhoneType
+  email: String
+  website: String
+  start_date: Int
+  end_date: Int
+  active: Boolean
+  notes: String
+}
+
+type CurriculumType {
+  _id: ID,
+  first_name: String
+  last_name: String
+  about: String
+  email: String
+  phone: PhoneType
+  linkedin: String
+  profession: ProfessionType
+  industry: Industry
+  country: Country
+  state: State
+  city: CityType
+  zip: String
+  references: [ReferenceType]
+  request_references: Boolean
+  skills: [SkillType]
+  languages: [LanguageType]
+  work: [WorkType]
+  education: [EducationType]
+  awards: String
+  public: Boolean
+  image: FileType
+  file: FileType
+}
+
+input PhoneInput {
+  code: String,
+  number: String!
+}
+
+input CityInput {
+  _id: ID
+  name: String!
+}
+input SkillInput {
+  skill: String!
+  proficiency: String!
+}
+
+input LanguageInput {
+  language: String!
+  proficiency: String!
+}
+
+input ReferenceInput {
+  name: String!
+  company: String
+  position: String
+  email: String
+  phone: PhoneInput
+}
+
+input EducationInput {
+  insitution: String!
+  degree: String
+  field: String
+  country: CountryInput
+  state: StateInput
+  city: CityInput
+  phone: PhoneInput
+  email: String
+  website: String
+  start_date: Int
+  end_date: Int
+  active: Boolean
+  notes: String
+}
+
+input WorkInput {
+  company: String!
+  position: String!
+  country: CountryInput
+  state: StateInput
+  city: CityInput
+  phone: PhoneInput
+  email: String
+  website: String
+  start_date: Int
+  end_date: Int
+  active: Boolean
+  notes: String
+}
+
+input CurriculumInput {
+  _id: ID,
+  first_name: String!
+  last_name: String!
+  about: String
+  email: String
+  phone: PhoneInput
+  linkedin: String
+  profession: ProfessionInput
+  industry: IndustryInput
+  country: CountryInput
+  state: StateInput
+  city: CityInput
+  zip: String
+  references: [ReferenceInput]
+  request_references: Boolean
+  skills: [SkillInput]
+  languages: [LanguageInput]
+  work: [WorkInput]
+  education: [EducationInput]
+  awards: String
+  public: Boolean
+  image: FileInput
+  file: FileInput
+}
+
+input CurriculumsFiltersInput {
+  search: String,
+  countries: [String]
+  states: [String]
+  cities: [String]
+  industries: [String]
+  professions: [String]
+}
+
+type PaginatedCurriculumsType {
+  curriculums: [CurriculumType],
+  pagination: PaginationType
+}
+
+type Query {
+  userCurriculum(_id: ID!): CurriculumType
+  userCurriculums(page: Int, filters: CurriculumsFiltersInput): PaginatedCurriculumsType
+}
+
+type Mutation {
+  saveUserCurriculum(curriculum: CurriculumInput): CurriculumType
+  deleteUserCurriculum(_id: ID!): String
+}

@@ -1,0 +1,425 @@
+<div class="row">
+    <div class="title-page">
+      My resume information
+    </div>
+    <div class="separate-page">
+      <div class="width-image">
+        <img class="image-design"
+          src="{{ image }}">
+      </div>
+      <div class="width-info">
+        <div class="row">
+          <div class="card">
+            <div class="card-title">
+              <h2>Personal Information</h2>
+            </div>
+            <div class="card-body">
+              <div class="d-grid-wrap">
+                <div>
+                  <h3>First Name</h3>
+                  <span class="personal-info-text">{{ first_name }}</span>
+                </div>
+                <div>
+                  <h3>Last Name</h3>
+                  <span class="personal-info-text">{{ last_name }}</span>
+                </div>
+                <div>
+                  <h3>Email</h3>
+                  <span class="personal-info-text">{{ email }}</span>
+                </div>
+                <div>
+                  <h3>Likedin</h3>
+                  <span class="personal-info-text">{{ linkedin }}</span>
+                </div>
+                <div>
+                  <h3>Country</h3>
+                  <span class="personal-info-text">{{ country }}</span>
+                </div>
+                <div>
+                  <h3>State</h3>
+                  <span class="personal-info-text">{{ state }}</span>
+                </div>
+                <div>
+                  <h3>City</h3>
+                  <span class="personal-info-text">{{ city }}</span>
+                </div>
+                <div>
+                  <h3>Zip</h3>
+                  <span class="personal-info-text">{{ zip }}</span>
+                </div>
+                <div>
+                  <h3>Industry</h3>
+                  <span class="personal-info-text">{{ industry }}</span>
+                </div>
+                <div>
+                  <h3>Occupation</h3>
+                  <span class="personal-info-text">{{ occupation }}</span>
+                </div>
+                <div>
+                  <h3>Cell Phone</h3>
+                  <span class="personal-info-text">{{ phone }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="card">
+            <div class="card-title">
+              <h2>About me/Professional Summary</h2>
+            </div>
+            <div class="card-body">
+              {{ about }}
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="card">
+            <div class="card-title">
+              <h2>Skills</h2>
+            </div>
+            <div class="card-body">
+              {{{ skills }}}
+            </div>
+          </div>
+          <div class="row">
+            <div class="card">
+              <div class="card-title">
+                <h2>Languages</h2>
+              </div>
+              <div class="card-body">
+                {{{ languages }}}
+              </div>
+            </div>
+            <div class="row">
+              <div class="card">
+                <div class="card-title">
+                  <h2>Work experience</h2>
+                </div>
+                <div class="card-body">
+                  {{{ work }}}
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="card">
+                <div class="card-title">
+                  <h2>Education</h2>
+                </div>
+                <div class="card-body">
+                  {{{ education }}}
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="card">
+                <div class="card-title">
+                  <h2>Accomplishments</h2>
+                </div>
+                <div class="card-body">
+                  {{{ accomplishments }}}
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="card">
+                <div class="card-title">
+                  <h2>References</h2>
+                </div>
+                <div class="card-body">
+                  {{{ references }}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<style>
+    ​ * {
+      font-size: 16px;
+      vertical-align: top;
+    }
+
+    ​
+
+    /* START: text; */
+    ​ .text-600 {
+      font-weight: 600 !important;
+    }
+
+    ​ .text-500 {
+      font-weight: 500 !important;
+    }
+
+    ​ .text-400 {
+      font-weight: 400 !important;
+    }
+
+    ​ .text-300 {
+      font-weight: 300 !important;
+    }
+
+    ​ .text-muted {
+      color: var(--f7-block-header-text-color);
+    }
+
+    ​ .text-center {
+      text-align: center;
+    }
+
+    ​ .text-left {
+      text-align: left;
+    }
+
+    ​ .text-right {
+      text-align: right;
+    }
+
+    ​
+    /* END: text; */
+    ​
+
+    /* START: width; */
+    ​ .w-auto {
+      width: auto !important;
+    }
+
+    ​ .w-100 {
+      width: 100% !important;
+    }
+
+    ​
+    /* END: width; */
+    ​
+
+    /* START: col; */
+    ​ .row {
+      position: relative;
+      width: 100%;
+      font-size: 0;
+    }
+
+    ​ .col-2 {
+      display: inline-block;
+      width: 8.3%;
+    }
+
+    ​ .col-3 {
+      display: inline-block;
+      width: 25%;
+    }
+
+    ​ .col-4 {
+      display: inline-block;
+      width: 33.3%;
+    }
+
+    ​ .col-6 {
+      display: inline-block;
+      width: 50%;
+    }
+
+    ​ .col-8 {
+      display: inline-block;
+      width: 66.3%;
+    }
+
+    ​ .col-10 {
+      display: inline-block;
+      width: calc(100% - 8.3%);
+    }
+
+    ​ .col-12 {
+      width: 100%;
+    }
+
+    ​
+
+    /* START: height; */
+    ​ .h-auto {
+      height: auto !important;
+    }
+
+    ​ .h-100 {
+      height: 100% !important;
+    }
+
+    ​
+    /* END: height; */
+    ​
+
+    /* START: block; */
+    ​ .d-block {
+      display: block !important;
+    }
+
+    ​ .d-none {
+      display: none !important;
+    }
+
+    ​
+    /* END: block; */
+    ​
+
+    /* START: flex; */
+    ​ .d-flex {
+      display: flex !important;
+    }
+
+    .d-flex-wrap {
+      display: flex !important;
+      flex-wrap: wrap !important;
+    }
+
+    .d-grid-wrap {
+      display: grid !important;
+      grid-template-columns: repeat(3, 1fr) !important;
+      width: 100% !important;
+      gap: 1rem !important;
+    }
+
+    ​ .flex-direction-column {
+      flex-direction: column !important;
+    }
+
+    ​ .justify-content-start {
+      justify-content: flex-start !important;
+    }
+
+    ​ .justify-content-center {
+      justify-content: center !important;
+    }
+
+    ​ .justify-content-between {
+      justify-content: space-between !important;
+    }
+
+    ​ .justify-content-around {
+      justify-content: space-around !important;
+    }
+
+    ​ .justify-content-end {
+      justify-content: flex-end !important;
+    }
+
+    ​ .align-items-start {
+      align-items: flex-start !important;
+    }
+
+    ​ .align-items-center {
+      align-items: center !important;
+    }
+
+    ​ .align-items-between {
+      align-items: space-between !important;
+    }
+
+    ​ .align-items-end {
+      align-items: flex-end !important;
+    }
+
+    ​
+    /* END: flex; */
+
+    .card-header {
+      background-color: rgb(226, 224, 224);
+      color: rgb(32, 32, 32);
+    }
+
+    .card-title {
+      width: 80%;
+      background-color: rgb(248, 248, 248);
+      border-top-left-radius: 1rem;
+      /* 16px */
+      border-top-right-radius: 1rem;
+      /* 16px */
+      border-width: 0.1px;
+      border-style: solid;
+      border-color: rgb(243, 243, 243);
+      padding-left: 8px;
+      font-size: 0.7rem;
+      line-height: 1.25rem;
+    }
+
+    .card-body {
+      box-shadow: 4px 8px 20px -10px rgba(173, 173, 173, 0.25);
+      width: 80%;
+      background-color: rgb(255, 255, 255);
+      color: rgb(32, 32, 32);
+      padding-top: 4px;
+      padding-left: 8px;
+      font-size: 0.7rem;
+      line-height: 1.25rem;
+      padding-bottom: 16px;
+      border-width: 0.1px;
+      border-style: solid;
+      border-color: rgb(243, 243, 243);
+      border-bottom-left-radius: 1rem;
+      /* 16px */
+      border-bottom-right-radius: 1rem;
+      /* 16px */
+    }
+
+    .card {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 32px;
+      margin-left: 40px;
+      margin-right: 40px;
+    }
+
+    .width-image {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      width: 20%;
+    }
+
+    .width-info {
+      width: 100%;
+    }
+
+    .image-design {
+      border-radius: 20%;
+      width: 250px;
+      border-width: 10px;
+      border-style: solid;
+      border-color: aqua;
+    }
+
+    .separate-page {
+      width: 100%;
+      display: flex;
+    }
+
+    .title-page {
+      margin-bottom: 20px;
+      font-size: medium;
+      font-weight: bold;
+    }
+
+    .personal-info-text {
+      color: rgb(0, 0, 173);
+      font-weight: bold;
+    }
+
+    .icon-class {
+      width: 30px;
+      height: 30px;
+      color: white;
+    }
+
+    .icon-container {
+      margin-top: 8px;
+      display: flex;
+      width: 30px;
+      border-radius: 5px;
+      justify-content: center;
+      align-items: center;
+      background-color: aqua;
+      padding-left: 4px;
+      padding-right: 4px;
+    }
+  </style>

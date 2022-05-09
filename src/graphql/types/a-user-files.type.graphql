@@ -1,0 +1,63 @@
+type File {
+  _id: ID,
+  buffer: String,
+  size: String,
+  type: String,
+  name: String,
+  alias: String,
+  is_public: Boolean,
+  expiration: Float
+  notes: String,
+  path: String
+}
+
+
+type FileType {
+  _id: ID,
+  buffer: String,
+  size: String,
+  type: String,
+  name: String,
+  alias: String,
+  is_public: Boolean,
+  expiration: Float
+  notes: String
+  path: String
+}
+
+input FileInput {
+  _id: ID,
+  buffer: String,
+  size: Float,
+  type: String,
+  name: String
+  alias: String,
+  is_public: Boolean,
+  expiration: Float
+  notes: String
+  path: String
+}
+
+type PaginatedUserFiles {
+  files: [FileType],
+  pagination: PaginationType
+}
+
+input userFilesFilterInput {
+  search: String
+  status: [String]
+}
+
+type Query {
+  userFiles(collection_type: String!, page: Int, filters: userFilesFilterInput): PaginatedUserFiles
+  userFile(_id: ID!, collection_type: String!): FileType
+  companyFiles(collection_type: String!, page: Int, filters: userFilesFilterInput): PaginatedUserFiles
+  companyFile(_id: ID!, collection_type: String!): FileType
+}
+
+type Mutation {
+  saveUserFile(file: FileInput, collection_type: String!): FileType
+  deleteUserFile(_id: ID!, collection_type: String!): String
+  saveCompanyFile(file: FileInput, collection_type: String!): FileType
+  deleteCompanyFile(_id: ID!, collection_type: String!): String
+}

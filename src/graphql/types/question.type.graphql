@@ -1,0 +1,74 @@
+type Answer {
+  key: String,
+  value: String 
+}
+
+type QuestionAdditionalInfoType {
+  shape: String
+  color: String
+  labels: [String]
+  other: String
+}
+
+type Question {
+  _id: String
+  course_id: String,
+  survey_id: String,
+  test_id: String,
+  type: String
+  order: Int,
+  required: Boolean
+  name: String
+  keys: [String]
+  options: [String],
+  answer: [Answer],
+  user_answer: [Answer],
+  user_correct: Boolean
+  explanation: String
+  additional_info: QuestionAdditionalInfoType
+}
+
+type QuestionAnswer {
+  _id: String,
+  user_id: String,
+  course_id: String,
+  survey_id: String,
+  test_id: String,
+  question_id: String,
+  answer: [Answer]
+}
+
+input AnswerInput {
+  key: String,
+  value: String
+}
+
+input QuestionAdditionalInfoInput {
+  shape: String
+  color: String
+  labels: String
+  other: String
+}
+
+input QuestionInput {
+  _id: String,
+  survey_id: String
+  test_id: String
+  type: String!
+  order: Int,
+  required: Boolean,
+  name: String!
+  keys: [String],
+  options: [String],
+  answer: [AnswerInput]
+  explanation: String
+  additional_info: QuestionAdditionalInfoInput
+}
+
+input QuestionAnswerInput {
+  question_id: String!,
+  course_id: String,
+  survey_id: String,
+  test_id: String,
+  answer: [AnswerInput]!
+}

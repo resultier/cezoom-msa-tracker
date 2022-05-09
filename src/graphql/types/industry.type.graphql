@@ -1,0 +1,189 @@
+type SubTopic {
+  _id: ID
+  name: String
+  is_added: Boolean
+}
+
+type Topic {
+  _id: ID
+  name: String
+  subs: [SubTopic]
+  is_added: Boolean
+}
+
+type IndustriesCompany {
+  company_id: String
+  industries: [Industry]
+  user_id: String
+}
+
+type Industry {
+  _id: ID
+  name: String
+  licenses: [License]
+  topics: [Topic]
+  custom_licenses: [License]
+}
+
+type PresenterIndustries {
+  _id: ID
+  user_id: String
+  industries: [Industry]
+}
+
+type EmployeeIndustries {
+  _id: ID
+  user_id: String
+  industries: [Industry]
+}
+
+type UserIndustries {
+  _id: ID
+  user_id: String,
+  industries: [Industry]
+}
+
+input IndustriesInput {
+  _id: String
+  name: String
+  licenses: [LicenseInput]
+  topics: [TopicInput]
+  state: StateInput
+}
+
+input IndustryInput {
+  _id: String
+  name: String
+  license: LicenseInput
+  topics: [TopicInput]
+  state: StateInput
+}
+
+input UserIndustriesInput {
+  user_id: String
+  industries: [IndustriesInput]
+}
+
+input UpdateUserIndustriesInput {
+  user_id: String
+  industry: IndustryInput
+}
+
+input AddTopicIndustryInput {
+  industry_id: ID
+  topic: TopicInput
+}
+
+input UpdateTopicsIndustryInput {
+  industry_id: ID
+  topic: UpdateTopicInput
+}
+
+input AddLicenseIndustryInput {
+  industry_id: ID!
+  license: LicenseInput!
+}
+
+input UpdateLicenseIndustryInput {
+  industry_id: ID!
+  license: UpdateLicenseInput!
+}
+
+input IndustriesCompanyInput {
+  company_id: String
+  industries: [IndustriesInput]
+  user_id: String
+}
+
+input SubTopicInput {
+  _id: ID
+  name: String
+  is_added: Boolean
+}
+
+input IndustriesTopicInput {
+  industry: IndustriesInput
+  topics: [TopicInput]
+}
+
+input PresenterIndustryInput {
+  industries: [IndustriesInput]
+}
+
+input EmployeeIndustryInput {
+  industries: [IndustriesInput]
+}
+
+input UpdateEmployeeIndustryInput {
+  industry: IndustryInput
+}
+
+input UpdatePresenterIndustryInput {
+  industry: IndustryInput
+}
+
+input UpdateTopicInput {
+  _id: ID!
+  name: String
+  subs: [SubTopicInput]
+}
+
+input DeleteLicenseIndustryInput {
+  industry_id: ID!
+  license_id: ID!
+}
+
+input TopicInput {
+  _id: ID
+  name: String
+  subs: [SubTopicInput]
+}
+
+input DeleteTopicIndustryInput {
+  industry_id: ID!
+  topic_id: ID!
+}
+
+
+type PaginatedUserIndustryLicences {
+  licences: [License]
+  pagination: PaginationType
+}
+
+input userIndustryLicenceFilterInput {
+  search: String
+  states: [String]
+  countries: [String]
+  industries: [String]
+  professions: [String]
+  status: [String]
+}
+
+type Query {
+  industries: [Industry]
+  industry(id: ID!): Industry
+  industriesByPresenter(id: ID!): PresenterIndustries
+  industriesByEmployee(id: ID!): EmployeeIndustries
+  industriesByCompany(id: ID!): IndustriesCompany
+  industriesById(ids: [String]!): [Industry]
+  industryByName(name: String!): Industry
+  licensesByState(industry_code: String!, state_code: String!): [License]
+  userIndustryLicenses(page: Int,filters: userIndustryLicenceFilterInput): PaginatedUserIndustryLicences
+  userIndustryLicensesByIndustry: [Industry]
+}
+
+type Mutation {
+  addIndustriesCompany(input: IndustriesCompanyInput): IndustriesCompany
+  addIndustryEmployee(data: EmployeeIndustryInput): EmployeeIndustries
+  addIndustryPresenter(data: PresenterIndustryInput): PresenterIndustries
+  addIndustry(name: String!): Industry
+  addTopicsToIndustry(input: AddTopicIndustryInput!): Industry
+  updateTopicToIndustry(input: UpdateTopicsIndustryInput!): Industry
+  deleteTopicToIndustry(input: DeleteTopicIndustryInput!): Industry
+  addLicenseToIndustry(input: AddLicenseIndustryInput!): Industry
+  updateLicenseToIndustry(input: UpdateLicenseIndustryInput!): Industry
+  deleteLicenseToIndustry(input: DeleteLicenseIndustryInput!): Industry
+  addIndustryUserLicense(input: IndustryInput!): License
+  addMultipleIndustriesUserLicense(industries: [IndustriesInput]!): String
+  deleteIndustryUserLicense(_id: ID!): String
+}

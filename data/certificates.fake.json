@@ -1,0 +1,66 @@
+{
+  "certificates": [
+    {
+      "header": {
+        "company_name": "Company",
+        "company_email": "company@domain.com",
+        "company_slogan": "Company slogan",
+        "country": {
+          "name": "United States",
+          "alpha2Code": "US"
+        },
+        "company_address": "2010 S 10th St",
+        "company_city": "Lincoln",
+        "company_state": "New Hampshire",
+        "company_phone": "(402) 477-3327"
+      },
+      "signature": {
+        "is_display_signature": false,
+        "signer": "Signer"
+      },
+      "providers": {
+        "is_display_provider_logo": false,
+        "providers": []
+      },
+      "additional_images": {
+        "is_display_assets": false,
+        "images": []
+      },
+      "additional_info": {
+        "file_complaints": "Files",
+        "disclaimer_statement": "Do consequat velit elit nisi ut sunt cillum. Proident ipsum in qui sint minim ut exercitation et minim deserunt deserunt ipsum. Consectetur labore amet labore sint qui quis ullamco mollit exercitation id. Enim in do aliqua excepteur consectetur commodo proident mollit ad excepteur ullamco duis. Veniam culpa excepteur laboris duis consequat. Eiusmod non in dolor laboris mollit duis sunt id nostrud nulla et ea. Consectetur proident cupidatat incididunt cupidatat reprehenderit aute esse qui duis.Continuing Education Credits issued may not apply towards license renewal in all states/provinces. It is the responsibility of each participant to verify the requirements of his/her state/provincial licensing board(s) and to self-report their continuing education hours earned."
+      }
+    },
+    {
+      "header": {
+        "company_name": "Organization",
+        "company_email": "organization@domain.com",
+        "company_slogan": "Organization slogan",
+        "country": {
+          "name": "United States",
+          "alpha2Code": "US"
+        },
+        "company_address": "1110 SE Cary Pkwy",
+        "company_city": "Cary",
+        "company_state": "Nebraska",
+        "company_phone": "(919) 297-0000"
+      },
+      "signature": {
+        "is_display_signature": false,
+        "signer": "Signer"
+      },
+      "providers": {
+        "is_display_provider_logo": false,
+        "providers": []
+      },
+      "additional_images": {
+        "is_display_assets": false,
+        "images": []
+      },
+      "additional_info": {
+        "file_complaints": "Files",
+        "disclaimer_statement": "Veniam sint nostrud dolor duis incididunt amet nostrud. In nisi aute occaecat est duis tempor voluptate pariatur commodo deserunt culpa consectetur voluptate. Culpa Lorem sint esse deserunt deserunt elit mollit veniam proident. Irure laborum ea in eiusmod mollit. Amet cupidatat enim dolor sunt commodo elit anim. Enim amet laboris do irure nisi ex adipisicing."
+      }
+    }
+  ]
+}

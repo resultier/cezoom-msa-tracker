@@ -1,0 +1,321 @@
+<html>
+  <head>
+    <style>
+
+      * {
+        font-size: 16px;
+        vertical-align: top;
+      }
+
+      /* START: text; */
+
+      .text-600 {
+        font-weight: 600 !important;
+      }
+
+      .text-500 {
+        font-weight: 500 !important;
+      }
+
+      .text-400 {
+        font-weight: 400 !important;
+      }
+
+      .text-300 {
+        font-weight: 300 !important;
+      }
+
+      .text-muted {
+        color: var(--f7-block-header-text-color);
+      }
+
+      .text-center {
+        text-align: center;
+      }
+
+      .text-left {
+        text-align: left;
+      }
+
+      .text-right {
+        text-align: right;
+      }
+
+      /* END: text; */
+
+      /* START: width; */
+
+      .w-auto {
+        width: auto !important;
+      }
+
+      .w-100 {
+        width: 100% !important;
+      }
+
+      /* END: width; */
+
+      /* START: col; */
+
+      .row {
+        position: relative;
+        width: 100%;
+        font-size: 0;
+      }
+
+      .col-2 {
+        display: inline-block;
+        width: 8.3%;
+      }
+
+      .col-3 {
+        display: inline-block;
+        width: 25%;
+      }
+
+      .col-4 {
+        display: inline-block;
+        width: 33.3%;
+      }
+
+      .col-6 {
+        display: inline-block;
+        width: 50%;
+      }
+
+      .col-8 {
+        display: inline-block;
+        width: 66.3%;
+      }
+
+      .col-10 {
+        display: inline-block;
+        width: calc(100% - 8.3%);
+      }
+
+      .col-12 {
+        width: 100%;
+      }
+
+      /* START: height; */
+
+      .h-auto {
+        height: auto !important;
+      }
+
+      .h-100 {
+        height: 100% !important;
+      }
+
+      /* END: height; */
+
+      /* START: block; */
+
+      .d-block {
+        display: block !important;
+      }
+
+      .d-none {
+        display: none !important;
+      }
+
+      /* END: block; */
+
+      /* START: flex; */
+
+      .d-flex {
+        display: flex !important;
+      }
+
+      .flex-direction-column {
+        flex-direction: column !important;
+      }
+
+      .justify-content-start {
+        justify-content: flex-start !important;
+      }
+
+      .justify-content-center {
+        justify-content: center !important;
+      }
+
+      .justify-content-between {
+        justify-content: space-between !important;
+      }
+
+      .justify-content-around {
+        justify-content: space-around !important;
+      }
+
+      .justify-content-end {
+        justify-content: flex-end !important;
+      }
+
+      .align-items-start {
+        align-items: flex-start !important;
+      }
+
+      .align-items-center {
+        align-items: center !important;
+      }
+
+      .align-items-between {
+        align-items: space-between !important;
+      }
+
+      .align-items-end {
+        align-items: flex-end !important;
+      }
+
+      /* END: flex; */
+    </style>
+  </head>
+  <body>
+    <div class="row">
+      <div class="col-4">
+        <img src="{{ image }}">
+      </div>
+      <div class="col-8">
+        <div class="row">
+          <div class="card">
+            <div class="card-header">
+              <h2>Personal Information</h2>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-4">
+                  <h3>First Name</h3>
+                  <span>{{ first_name }}</span>
+                </div>
+                <div class="col-4">
+                  <h3>Last Name</h3>
+                  <span>{{ last_name }}</span>
+                </div>
+                <div class="col-4">
+                  <h3>Email</h3>
+                  <span>{{ email }}</span>
+                </div>
+                <div class="col-4">
+                  <h3>Likedin</h3>
+                  <span>{{ linkedin }}</span>
+                </div>
+                <div class="col-4">
+                  <h3>Country</h3>
+                  <span>{{ country }}</span>
+                </div>
+                <div class="col-4">
+                  <h3>State</h3>
+                  <span>{{ state }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="card">
+            <div class="card-header">
+              <h2>About me/Professional Summary</h2>
+            </div>
+            <div class="card-body">
+              {{ about }}
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="card">
+            <div class="card-header">
+              <h2>Skills</h2>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <h3>${skill.skill}</h3>
+                <span>${skill.proficiency}</span>
+              </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="card">
+            <div class="card-header">
+              <h2>Languages</h2>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <h3>${language.language}</h3>
+                <span>${language.proficiency}</span>
+              </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="card">
+            <div class="card-header">
+              <h2>Work experience</h2>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-2">
+                  icon
+                </div>
+                <div class="col-10">
+                  <h3>${work.profession}</h3>
+                  <span>${work.company} | ${work.from} - ${work.to || 'Ongoing'}</span>
+                </div>
+                <div class="col-12">
+                  ${work.notes}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="card">
+            <div class="card-header">
+              <h2>Education</h2>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-2">
+                  icon
+                </div>
+                <div class="col-10">
+                  <h3>${education.insitution}</h3>
+                  <span>${education.degree} | ${education.from} - ${education.to || 'Ongoing'}</span>
+                </div>
+                <div class="col-12">
+                  ${education.notes}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="card">
+            <div class="card-header">
+              <h2>Accomplishments</h2>
+            </div>
+            <div class="card-body">
+              {{ accomplishments }}
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="card">
+            <div class="card-header">
+              <h2>References</h2>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-2">
+                  icon
+                </div>
+                <div class="col-10">
+                  <h3>${reference.name}</h3>
+                  <span>${reference.position} | ${reference.email}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

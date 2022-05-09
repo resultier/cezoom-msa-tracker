@@ -1,0 +1,182 @@
+type CertificateHeader {
+  _id: ID
+  company_logo: FileType
+  company_name: String
+  company_email: String
+  company_slogan: String
+  company_country: String
+  company_address: String
+  company_city: String
+  company_state: String
+  company_phone: String
+}
+
+type CertificateSignature {
+  _id: ID
+  is_display_signature: Boolean
+  signature: FileType
+  signer: String
+}
+
+type CertificateProvider {
+  _id: ID
+  is_display_provider_logo: Boolean
+  providers: [Provider]
+}
+
+type CertificateAssets {
+  _id: ID
+  is_display_assets: Boolean
+  images: [FileType]
+}
+
+type CertificateAdditionalInfo {
+  _id: ID
+  file_complaints: String
+  disclaimer_statement: String
+}
+
+type User {
+  _id: String
+  email: String
+  first_name: String
+  last_name: String
+  avatar: String
+}
+
+input CertificateHeaderInput {
+  _id: ID
+  company_name: String
+  company_email: String
+  company_slogan: String
+  company_country: String
+  company_address: String
+  company_city: String
+  company_state: String
+  company_phone: String,
+  company_logo: FileInput
+}
+
+input CertificateSignatureInput {
+  _id: ID
+  is_display_signature: Boolean
+  signer: String
+  signature: FileInput
+}
+
+input CertificateProviderInput {
+  _id: ID
+  is_display_provider_logo: Boolean
+  providers: [ProviderInput]
+}
+
+input CertificateAssetsInput {
+  _id: ID
+  is_display_assets: Boolean,
+  images: [FileInput]
+}
+
+input CertificateAdditionalInfoInput {
+  _id: ID
+  file_complaints: String
+  disclaimer_statement: String
+}
+
+type CertificateCourseType {
+  course_id: ID,
+  course_type: String
+  course_credits: Int
+  course_presenters: [User]
+  course_categories: [String]
+  course_industries: [Industry]
+}
+
+type CertificateType {
+  _id: ID
+  name: String
+  company_id: String
+  course: CertificateCourseType,
+  header: CertificateHeader
+  signature: CertificateSignature
+  providers: CertificateProvider
+  additional_images: CertificateAssets
+  additional_info: CertificateAdditionalInfo
+  total_issued_certificates: Int
+  is_active: Boolean
+  licences: [License]
+  certificate: FileType
+  certification: FileType
+  earn_date: Int
+  notes: String
+  status: String
+}
+
+input CertificateCourseInput {
+  course_id: ID,
+  course_type: String,
+  course_credits: Int
+  course_presenters: [UserInput]
+  course_categories: [String],
+  course_industries: [IndustryInput]
+}
+
+input CertificateInput {
+  _id: ID
+  name: String!
+  company_id: String!
+  course: CertificateCourseInput!
+  header: CertificateHeaderInput!
+  signature: CertificateSignatureInput!
+  providers: CertificateProviderInput!
+  additional_images: CertificateAssetsInput!
+  additional_info: CertificateAdditionalInfoInput!
+  is_active: Boolean
+}
+
+input UserCertificateInput {
+  _id: ID
+  name: String!
+  course: CertificateCourseInput!
+  licences: [LicenseInput]!
+  providers: CertificateProviderInput
+  certificate: FileInput
+  certification: FileInput
+  earn_date: Int
+  notes: String
+}
+
+input LicenseFilter {
+  proffession: String
+  industry: String
+  state: String
+  country: String
+}
+
+input CertificateFilter {
+  search: String
+  license: LicenseFilter
+  source: [String]
+  valid_from: Int
+  valid_to: Int
+}
+
+type PaginatedCertificates {
+  certificates: [CertificateType],
+  pagination: PaginationType
+}
+
+type Query {
+  certificates: PaginatedCertificates
+  certificate(_id: ID!): CertificateType
+  userCertificates(page: Int, filters: CertificateFilter): PaginatedCertificates
+  userCertificate(_id: ID!): CertificateType
+}
+
+type Mutation {
+  certificate(input: CertificateInput!): CertificateType
+  deleteCertificate(_id: ID!): String
+  addLicenseToCertificate(certificate_id: ID!, license: LicenseInput): CertificateType
+  userCertificate(input: UserCertificateInput!): CertificateType
+  userCourseCertificate(course_id: ID!): CertificateType
+  deleteUserCertificate(_id: ID!): String
+}

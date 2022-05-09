@@ -1,0 +1,86 @@
+type User {
+  _id: String
+  email: String
+  first_name: String
+  last_name: String
+  avatar: String
+}
+
+input UserInput {
+  _id: String
+  email: String
+  first_name: String
+  last_name: String
+  avatar: String
+}
+
+input OptionADMInput {
+  name: String!
+  key: String
+  success: Boolean
+  selected: Boolean
+}
+
+type SurveyFilled {
+  answers: Int
+  success: Boolean
+}
+
+type Survey {
+  _id: String,
+  name: String,
+  description: String,
+  end_message: String,
+  type: String,
+  required: Boolean,
+  deadline: Float,
+  course_id: String,
+  company_id: String,
+  questions: [Question],
+  presenters: [User],
+  progress: Float
+  completed: Boolean
+}
+
+input SurveyInput {
+  _id: String,
+  course_id: String!
+  company_id: String!
+  name: String!
+  description: String,
+  end_message: String,
+  type: String!,
+  required: Boolean!
+  deadline: Float!
+  presenters: [UserInput]
+}
+
+type PaginationType {
+  page: Int,
+  last_page: Int
+}
+
+type PaginatedSurveys {
+  surveys: [Survey],
+  pagination: PaginationType
+}
+
+input surveysFilterInput {
+  search: String
+  required: Boolean
+}
+
+type Query {
+  surveys(page: Int, filters: surveysFilterInput): PaginatedSurveys
+  survey(id: ID!): Survey
+  surveysByIds(user_id: ID!, ids: [ID]!): Survey
+  surveysByUser(page: Int, filters: surveysFilterInput): PaginatedSurveys
+  surveysByCourse(id: ID!, page: Int, filters: surveysFilterInput): PaginatedSurveys
+}
+
+type Mutation {
+  survey(input: SurveyInput): Survey
+  surveyQuestion(input: QuestionInput): Question
+  answerSurveyQuestion(input: QuestionAnswerInput): Question
+  finishSurvey(_id: ID!): Boolean
+}
